@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Homepage do Netflix</title>
+	<link rel="icon" type="image/x-icon" href="images/netflixfavicon.ico">
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			font-family: Arial, sans-serif;
+			background-color: #141414;
+			color: #fff;
+		}
+
+		header {
+			padding: 30px;
+			background-color: #000;
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			z-index: 999;
+		}
+
+		header img {
+			float: left;
+			height: 40px;
+			margin-right: 20px;
+		}
+
+		nav {
+			float: right;
+			margin-top: 10px;
+		}
+
+		nav ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+
+		nav li {
+			float: left;
+			margin-right: 20px;
+		}
+
+		nav a {
+			color: #fff;
+			text-decoration: none;
+			padding: 10px 15px;
+			border-radius: 5px;
+			transition: background-color 0.3s ease;
+		}
+
+		nav a:hover {
+			background-color: #333;
+		}
+
+		.catalog {
+			padding: 50px;
+			max-width: 1200px;
+			margin: 60px auto 0
+		}
+
+		.catalogo-item {
+			background-color: #333;
+			border-radius: 10px;
+			overflow: hidden;
+			position: relative;
+			float: left;
+			width: calc(33.33% - 60px);
+			margin: 20px;
+			height: 300px;
+			z-index: -1;
+			padding: 10px;
+			opacity: 1;
+			z-index: -3;
+		}
+
+		.catalogo-item img {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			z-index: 0;
+			transition: filter 0.3s ease;
+			opacity: 1;
+			z-index: -1;
+		}
+
+		.catalogo-item img:hover {
+			filter: brightness(60%);
+
+		}
+
+		.catalogo-item:hover {
+			opacity: 1;
+			z-index: -3;
+
+		}
+
+		.catalogo-item:hover {
+			color: #fff;
+			opacity: 1;
+			transition: opacity 0.3s ease;
+			z-index: 3;
+
+		}
+
+		.catalogo-item-textos {
+			color: #fff;
+			opacity: -1;
+			transition: opacity 0.3s ease;
+			z-index: 3;
+		}
+
+		/* aqui*/
+		.catalogo-items img {
+			position: static;
+			margin-top: 180px;
+			margin-left: 700px;
+			top: 0;
+			left: 0;
+			width: 40%;
+			height: 30%;
+			object-fit: cover;
+			z-index: -1;
+			transition: filter 0.3s ease;
+		}
+
+		.catalogo-items:hover img {
+			filter: brightness(60%);
+		}
+
+		.catalogo-items-textos {
+			color: #fff;
+			opacity: 0;
+			transition: opacity 0.3s ease;
+			z-index: -3;
+			height: 50%;
+			width: 30%;
+			margin-top: -500px;
+			margin-left: 200px;
+			margin-right: 1000px;
+		}
+
+		.catalogo-items:hover .catalogo-items-textos {
+			opacity: 1;
+		}
+
+		.catalogo-items-textos h2 {
+			font-size: 60px;
+			font-weight: normal;
+			background-color: rgba(0, 0, 0, 0.6);
+			padding: 10px;
+			border-radius: 10px;
+			margin: 0px;
+			height: 100%;
+			width: 50%;
+		}
+
+		.catalogo-items-textos p {
+			font-size: 14px;
+			font-weight: normal;
+			line-height: 1.4;
+			background-color: rgba(0, 0, 0, 0.6);
+			padding: 10px;
+			border-radius: 10px;
+		}
+
+		.catalogo-items-textos button {
+			background-color: #fff;
+			color: #000;
+			opacity: 1;
+			border: none;
+			border-radius: 20px;
+			padding: 10px 20px;
+			margin-top: 20px;
+			cursor: pointer;
+			font-size: 24px;
+			font-weight: bold;
+			transition: background-color 0.3s ease;
+		}
+
+		.catalogo-items-textos button:hover {
+			background-color: #e50914;
+			color: #fff;
+			opacity: 1;
+		}
+
+
+
+		.catalogo-item:hover .catalogo-item-textos {
+			color: #fff;
+			opacity: 1;
+			transition: opacity 0.3s ease;
+			z-index: 3;
+
+		}
+
+		.catalogo-item-textos h2 {
+			font-size: 24px;
+			font-weight: normal;
+			background-color: rgba(0, 0, 0, 0.6);
+			padding: 10px;
+			border-radius: 10px;
+			margin: 0px;
+		}
+
+		.catalogo-item-textos p {
+			font-size: 14px;
+			font-weight: normal;
+			line-height: 1.4;
+			background-color: rgba(0, 0, 0, 0.6);
+			padding: 10px;
+			border-radius: 10px;
+		}
+
+		.catalogo-item-textos button {
+			background-color: #fff;
+			color: #000;
+			border: none;
+			border-radius: 20px;
+			padding: 10px 20px;
+			margin-top: 20px;
+			cursor: pointer;
+			font-size: 14px;
+			font-weight: bold;
+			transition: background-color 0.3s ease;
+		}
+
+
+
+		.catalogo-item-textos button:hover {
+			background-color: #e50914;
+			color: #fff;
+		}
+
+
+		.container {
+			position: relative;
+			height: 80vh;
+		}
+
+		.elemento {
+			position: absolute;
+			top: 50px;
+			left: 350px;
+			object-fit: cover;
+			z-index: -1;
+			transition: filter 0.3s ease;
+		}
+
+		.Suspense {
+			text-align: center;
+			position: inherit;
+		}
+
+
+		.Ação {
+			text-align: center;
+			position: relative;
+		}
+
+		footer {
+
+			position: absolute;
+			margin-top: 1400px;
+			background-color: rgb(56, 41, 41);
+			border-radius: 20px;
+			margin-right: 460px;
+			padding: 20px;
+		}
+
+		.integrantes {
+			font-style: italic;
+			font: bold;
+			font-size: 20px;
+			font-family: system-ui;
+			background-color: #2e1e1e;
+			padding: 10px;
+			margin-right: 660px;
+			border-radius: 90px;
+			color: rgb(77, 56, 56);
+		}
+
+		.categorias {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding: 10px;
+			margin-left: 100px;
+		}
+
+		.list {
+			display: flex;
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+
+		.list li {
+			margin-right: 250px;
+			margin-left: 100px;
+			font-size: 35px;
+			font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+			font-weight: bold;
+		}
+	</style>
+</head>
+
+<body>
+	<header>
+		<img src="images/netflix-logo.png" alt="Netflix">
+		<nav>
+			<ul>
+				<li><a href="#">Início</a></li>
+				<li><a href="#">Séries</a></li>
+				<li><a href="#">Filmes</a></li>
+				<li><a href="#">Minha Lista</a></li>
+			</ul>
+		</nav>
+	</header>
+
+
+
+
+	<article class="catalogo-items">
+		<img src="images/witcher.jpg" alt="The whitcher">
+		<div class="catalogo-items-textos">
+			<h2>The Witcher</h2>
+			<p>Geralt de Rívia, um mutante caçador de monstros, sai em busca de seu destino em um mundo turbulento, onde
+				as pessoas podem ser mais perversas que as criaturas selvagens..</p>
+			<button>Assistir</button>
+			<button>Mais informações</button>
+		</div>
+	</article>
+
+	<main class="catalog">
+
+
+		<main class="catalog">
+
+			<div class="categorias">
+				<ul class="list">
+					<li>Suspense</li>
+					<li>Ação</li>
+					<li>Terror</li>
+				</ul>
+			</div>
+
+
+
+			<article class="catalogo-item">
+				<img src="images/strangerthings.jpg" alt="Stranger Things">
+				<div class="catalogo-item-textos">
+					<h2>Stranger Things</h2>
+					<p>Quando Will Byers desaparece misteriosamente, seus amigos iniciam uma busca pelo garoto,
+						descobrindo
+						experimentos secretos, forças sobrenaturais e uma garota estranha com poderes telecinéticos.
+					</p>
+					<button>Assistir</button>
+					</section>
+				</div>
+			</article>
+
+			<article class="catalogo-item">
+				<img src="images/narcos.jpg" alt="Narcos">
+				<div class="catalogo-item-textos">
+					<h2>Narcos</h2>
+					<p>Baseada na história real do narcotraficante Pablo Escobar, essa série retrata a vida do
+						poderoso
+						chefão do tráfico e as forças policiais e políticas que tentam capturá-lo.</p>
+					<button>Assistir</button>
+				</div>
+			</article>
+
+			<article class="catalogo-item">
+				<img src="images/thecrown.jpg" alt="The Crown">
+				<div class="catalogo-item-textos">
+					<h2>The Crown</h2>
+					<p>Esta série dramática segue a vida da rainha Elizabeth II desde sua juventude até a atualidade,
+						explorando
+						os eventos históricos que moldaram o segundo reinado mais longo da história britânica.</p>
+					<button>Assistir</button>
+				</div>
+			</article>
+
+			<article class="catalogo-item">
+				<img src="images/lupin.jpg" alt="Lupin">
+				<div class="catalogo-item-textos">
+					<h2>Lupin</h2>
+					<p>Em Paris, o ladrão profissional Assane Diop busca vingança pelo injusto tratamento de seu pai, e
+						usa
+						as
+						habilidades de ladrão para expor os crimes da elite.</p>
+					<button>Assistir</button>
+				</div>
+			</article>
+
+			<article class="catalogo-item">
+				<img src="images/ozark.jpg" alt="Ozark">
+				<div class="catalogo-item-textos">
+					<h2>Ozark</h2>
+					<p>Um consultor financeiro se muda com sua família para as montanhas Ozark para lavar 500
+						milhões de
+						dólares
+						e acalmar um traficante de drogas.</p>
+					<button>Assistir</button>
+				</div>
+
+
+			</article>
+
+			<article class="catalogo-item">
+				<img src="images/gambito.jpg" alt="O Gambito da Rainha">
+				<div class="catalogo-item-textos">
+					<h2>O Gambito da Rainha</h2>
+					<p>Em um orfanato dos anos 1950, uma jovem prodígio do xadrez luta contra o vício enquanto enfrenta
+						os
+						melhores jogadores do mundo.</p>
+					<button>Assistir</button>
+				</div>
+			</article>
+
+			<article class="catalogo-item">
+				<img src="images/dark.jpg" alt="Dark">
+				<div class="catalogo-item-textos">
+					<h2>Dark</h2>
+					<p>Em uma cidade pequena, desaparecimentos inexplicáveis ​​levam quatro famílias a uma busca
+						frenética
+						por
+						respostas enquanto tentam desvendar um mistério que abrange três gerações.</p>
+					<button>Assistir</button>
+				</div>
+			</article>
+
+			<article class="catalogo-item">
+				<img src="images/lacasadepapel.jpeg" alt="La Casa de Papel">
+				<div class="catalogo-item-textos">
+					<h2>La Casa de Papel</h2>
+					<p>Oito ladrões fazem reféns e se trancam na Casa da Moeda da Espanha com o ambicioso plano de
+						realizar
+						o
+						maior roubo da história.</p>
+					<button>Assistir</button>
+				</div>
+			</article>
+
+			<article class="catalogo-item">
+				<img src="images/umbrellaacademy.jpg" alt="The Umbrella Academy">
+				<div class="catalogo-item-textos">
+					<h2>The Umbrella Academy</h2>
+					<p>Uma família disfuncional de super-heróis se reúne para resolver o mistério da morte de seu
+						pai e o fim iminente do mundo.</p>
+					<button>Assistir</button>
+				</div>
+			</article>
+			<article class="catalogo-item">
+				<img src="images/witcher.jpg" alt="The Witcher">
+				<div class="catalogo-item-textos">
+					<h2>The Witcher</h2>
+					<p>Um caçador de monstros solitário luta para encontrar seu lugar em um mundo onde as pessoas
+						frequentemente
+						se provam mais perversas do que as bestas.</p>
+					<button>Assistir</button>
+				</div>
+			</article>
+			<article class="catalogo-item">
+				<img src="images/breakingbad.jpg" alt="Breaking Bad">
+				<div class="catalogo-item-textos">
+					<h2>Breaking Bad</h2>
+					<p>Um professor de química do ensino médio com câncer terminal se junta a um ex-aluno para
+						produzir e
+						vender
+						metanfetamina para garantir o futuro financeiro de sua família.</p>
+					<button>Assistir</button>
+				</div>
+			</article>
+			<article class="catalogo-item">
+				<img src="images/suits.jpg" alt="Suits">
+				<div class="catalogo-item-textos">
+					<h2>Suits</h2>
+					<p>Mike Ross, um jovem inteligente que abandonou a faculdade de direito, é contratado pelo
+						advogado mais
+						bem
+						sucedido de Nova York, Harvey Specter, apesar de não ter diploma de direito.</p>
+					<button>Assistir</button>
+				</div>
+
+
+
+			</article>
+		</main>
+		<footer>
+			<div id="footer">
+				<p>
+					1- !DOCTYPE html - declara o tipo e versão do documento. <br>
+
+					html lang="pt-BR" - o elemento HTML que envolve toda a página. Ele também especifica o idioma da
+					página,
+					nesse caso, é Português do Brasil. <br>
+
+					head - contém metadados sobre o documento, como o título, codificação de caracteres e links para
+					arquivos
+					externos. <br>
+
+					meta charset="UTF-8" - define a codificação de caracteres do documento como UTF-8. <br>
+
+					title - especifica o título do documento. <br>
+
+					link - define a relação entre o documento atual e um recurso externo. Neste caso, ele especifica o
+					favicon,
+					um ícone associado ao site que aparece na guia do navegador. <br>
+
+					style - contém o código CSS que define o estilo do documento. <br>
+
+					body - envolve o conteúdo visível da página, incluindo texto, imagens e multimídia. <br>
+
+					header - contém o logotipo, menu de navegação e outros conteúdos relacionados ao cabeçalho. <br>
+
+					img - exibe uma imagem do logotipo da Netflix. <br>
+
+					nav - contém o menu de navegação. <br>
+
+					ul - define uma lista não ordenada de itens de navegação. <br>
+
+					li - define um item de lista no menu de navegação. <br>
+
+					a - define um hyperlink no menu de navegação. <br>
+
+					div class="catalog" - envolve a seção de catálogo de filmes. <br>
+
+					div class="catalogo-item" - representa um único item de filme no catálogo. <br>
+
+					img - exibe a imagem associada ao filme. <br>
+
+					div class="catalogo-item-textos" - contém as informações de texto relacionadas ao filme, como seu
+					título,
+					resumo e um botão para assisti-lo.<br>
+
+					<br>
+
+					2- O posicionamento fixo está sendo usado no elemento "header", que contém o logotipo da Netflix e o
+					menu de
+					navegação. A vantagem de usar o posicionamento fixo é que, independentemente de onde o usuário role
+					na
+					página, o cabeçalho permanecerá sempre visível no topo da tela. Isso torna a navegação mais fácil e
+					rápida,
+					já que o usuário não precisa rolar até o topo da página para acessar o menu de navegação ou voltar à
+					página
+					inicial. Além disso, o uso do z-index garante que o cabeçalho fique sempre acima dos demais
+					elementos da
+					página.
+					<br>
+					<br>
+
+					3- O posicionamento relativo está sendo usado para a imagem e o texto que aparecem ao passar o mouse
+					sobre
+					os itens do catálogo na homepage do Netflix. No código HTML e CSS fornecido, esses elementos são
+					referenciados pelas classes "catalogo-items" e "catalogo-items-textos".
+
+					Ao passar o mouse sobre um item do catálogo, a imagem correspondente se torna mais escura e o texto
+					aparece.
+					Para conseguir esse efeito, o CSS usa o posicionamento relativo para posicionar a imagem e o texto
+					em
+					relação ao elemento pai (que tem a classe "catalogo-item").
+
+					Para a imagem, o CSS define o posicionamento relativo com a propriedade "position: static" e então
+					usa
+					as
+					propriedades "margin-top", "margin-left", "height" e "width" para ajustar sua posição e tamanho.
+					Para o
+					texto, a propriedade "position: relative" é definida para o elemento pai, e o texto é então
+					posicionado
+					em
+					relação a ele usando as propriedades "margin-top", "margin-left", "height" e "width".
+					<br>
+					<br>
+					4- O posicionamento absoluto está sendo usado no CSS para estilizar a classe ".catalogo-item img"
+					nesta
+					página. Essa classe é usada para definir o estilo de imagem que aparece em cada item do catálogo de
+					filmes e
+					programas de TV. A imagem é posicionada de forma absoluta com relação à div pai, e é definida como
+					tendo
+					uma
+					largura de 100% e uma altura de 100%, para que cubra todo o espaço disponível dentro da div. Além
+					disso,
+					é
+					aplicada uma transição de filtro para que a imagem fique com brilho reduzido quando o cursor do
+					mouse é
+					colocado em cima dela
+					<br>
+					<br>
+					5- Nesta página, o posicionamento float está sendo usado nas classes .catalogo-item e
+					.catalogo-items
+					img. O
+					float é uma propriedade CSS que permite que um elemento fique ao lado do outro, ao invés de ficar
+					abaixo
+					dele como é padrão.
+					<br>
+					<br>
+					Na classe .catalogo-item, a propriedade float: left é usada para que cada item do catálogo (que tem
+					a
+					classe
+					.catalogo-item) fique ao lado do outro em vez de ficar abaixo. Isso é feito para que haja três itens
+					por
+					linha.
+
+					Na classe .catalogo-items img, a propriedade float: static foi usada. Ela mantém o elemento no fluxo
+					normal
+					do layout, mas foi usada para ajustar a posição do elemento em relação aos demais elementos dentro
+					da
+					classe
+					.catalogo-items. Nesse caso, a imagem é movida para a direita e para baixo, ficando parcialmente sob
+					os
+					outros elementos.
+					<br>
+					<br>
+
+
+				<p class="integrantes">Integantes: Guilherme Ricci, Davi Lima de Almeida</p>
+				</p>
+			</div>
+		</footer>
+</body>
+
+</html>
